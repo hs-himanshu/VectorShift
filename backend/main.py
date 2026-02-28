@@ -3,10 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# ✅ Allow React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for assignment (production should restrict)
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,7 +25,7 @@ def parse_pipeline(pipeline: dict = Body(...)):
     num_nodes = len(nodes)
     num_edges = len(edges)
 
-    # ---------- DAG CHECK ----------
+    # DAG CHECK ALGORITHM
     graph = {node["id"]: [] for node in nodes}
 
     for edge in edges:
