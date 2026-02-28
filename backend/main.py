@@ -32,21 +32,21 @@ def parse_pipeline(pipeline: dict = Body(...)):
         graph[edge["source"]].append(edge["target"])
 
     visited = set()
-    visiting = set()
+    pathvisited = set()
 
     def has_cycle(node):
-        if node in visiting:
+        if node in pathvisited:
             return True
         if node in visited:
             return False
 
-        visiting.add(node)
+        pathvisited.add(node)
 
         for neighbor in graph[node]:
             if has_cycle(neighbor):
                 return True
 
-        visiting.remove(node)
+        pathvisited.remove(node)
         visited.add(node)
         return False
 
